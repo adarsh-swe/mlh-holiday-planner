@@ -18,7 +18,11 @@ pip install -r requirements.txt
 ## Usage
 
 
-Create a .env file using the example.env template
+Create a .env file with the following line included: 
+```bash
+URL=localhost:5000
+```
+URL=localhost:5000
 
 
 Start flask development server
