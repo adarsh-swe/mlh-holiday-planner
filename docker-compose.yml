@@ -18,3 +18,12 @@ services:
         restart: always
         env_file:
             - .env
+        volumes:
+            - mydatabase:/var/lib/postgresql/data
+        environment:
+            - "POSTGRES_HOST_AUTH_METHOD=trust"
+        ports:
+            - 5432:5432
+
+volumes:
+    mydatabase:
