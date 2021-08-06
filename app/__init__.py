@@ -5,6 +5,7 @@ from flask import (
     Flask, render_template, request,
 )
 from werkzeug.security import generate_password_hash, check_password_hash
+import requests
 
 app = Flask(__name__)
 app.config["SQLALCHEMY_DATABASE_URI"] = "postgresql+psycopg2://{user}:{passwd}@{host}:{port}/{table}".format(
@@ -79,3 +80,30 @@ def login():
             return error, 418
 
     return render_template("login.html")
+
+@app.route('/flights')
+def flights():
+    return render_template("flights.html")
+
+@app.route('/flightsAPI', methods=("GET", "POST"))
+def flightsAPI(): 
+    if request.method=="POST":
+        origin = request.form.get("origin")
+        destination = request.form.get("destination")
+        departDate = request.form.get("departDate")
+        returnDate = request.form.get("returnDate")
+        error = None
+    
+    url = f'https://skyscanner-skyscanner-flight-search-v1.p.rapidapi.com/apiservices/browseroutes/v1.0/US/USD/en-US/{origin}-sky/{destination}-sky/{departDate}'
+    querystring = {"inboundpartialdate":returnDate}
+    headers = {
+        'x-rapidapi-key': os.getenv("SKYSCANNER_KEY"),
+        'x-rapidapi-host': "skyscanner-skyscanner-flight-search-v1.p.rapidapi.com"
+    }
+
+    response = requests.request("GET", url, headers=headers, params=querystring)
+
+    # print(response.text)
+        
+
+    return response.text
