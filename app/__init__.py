@@ -1,31 +1,6 @@
-<<<<<<< HEAD
 import os
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
-=======
-# <<<<<<< HEAD
-# from flask import Flask
-# =======
-# from flask import (
-#     Flask, render_template, request,
-# )
-# from werkzeug.security import generate_password_hash, check_password_hash
-# from flask_sqlalchemy import SQLAlchemy
-# >>>>>>> f0833b60b4a1562de186012a1481858b26e07501
-
-# app = Flask(__name__)
-
-
-# @app.route('/')
-# <<<<<<< HEAD
-# def hello():
-#     return 'Hello, World!'
-# =======
-# def index():
-#     return render_template("index.html")
-# >>>>>>> f0833b60b4a1562de186012a1481858b26e07501
-
->>>>>>> 7657eb209eac350cd0d01ab6365ae61f31edc29a
 from flask import (
     Flask, render_template, request,
 )

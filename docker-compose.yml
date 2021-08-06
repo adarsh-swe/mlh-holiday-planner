@@ -6,10 +6,10 @@ services:
         restart: always
         env_file:
             - .env
-        volumes:
-            - .:/holidayplanner
         ports:
             - 5000:5000
+        volumes:
+            - .:/holidayplanner
         depends_on:
             - db
     db:
