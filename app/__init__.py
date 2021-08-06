@@ -81,9 +81,12 @@ def login():
 
     return render_template("login.html")
 
+@app.route('/flights')
+def flights():
+    return render_template("flights.html")
 
-@app.route('/flights', methods=("GET", "POST"))
-def flights(): 
+@app.route('/flightsAPI', methods=("GET", "POST"))
+def flightsAPI(): 
     if request.method=="POST":
         origin = request.form.get("origin")
         destination = request.form.get("destination")
