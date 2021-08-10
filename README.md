@@ -1,20 +1,17 @@
 # mlh-holiday-planner
 
-## Installation
+## Dev Environment
 
-Make sure you have python3 and pip installed
-Create and activate virtual environment using virtualenv
+Make a local copy of `.env` file following `example.env`
 
-```bash
-$ python -m venv python3-virtualenv
-$ source python3-virtualenv/bin/activate
+To start development environment:
+
+```
+$ docker-compose up --build -d
 ```
 
-Use the package manager [pip](https://pip.pypa.io/en/stable/) to install all dependencies
-
-```bash
-pip install -r requirements.txt
-```
+Any changes to HTML front-end and back-end will be reflected by hitting refresh in the browser.
+To install additional Flask packages, re-run docker-compose up build command.
 
 ## Usage
 
@@ -34,18 +31,21 @@ $ flask run
 ```
 
 ## To use the '/flightsAPI' endpoint:
-- make sure the api key is added in .env 
-- call the endpoint with a POST request containing the following data (as key-value/ form data): 
-  - origin = origin airport code
-  - destination = destination airport code
-  - departDate = date of departure
-  - returnDate = date of arrival 
 
-EXAMPLE: 
+-   make sure the api key is added in .env
+-   call the endpoint with a POST request containing the following data (as key-value/ form data):
+    -   origin = origin airport code
+    -   destination = destination airport code
+    -   departDate = date of departure
+    -   returnDate = date of arrival
+
+EXAMPLE:
+
 ```bash
 origin:YYZ
 destination:YVR
 departDate:2021-09-01
 returnDate:2021-12-01
 ```
-*Note: for testing purposes, just use the exact form data above*
+
+_Note: for testing purposes, just use the exact form data above_
