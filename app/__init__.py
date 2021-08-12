@@ -2,10 +2,11 @@ import os
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 from flask import (
-    Flask, render_template, request,
+    Flask, render_template, request, session, flash, redirect, url_for, logging
 )
+from wtforms import Form, StringField, TextAreaField, PasswordField, validators
+from functools import wraps
 from werkzeug.security import generate_password_hash, check_password_hash
-import requests
 
 app = Flask(__name__)
 app.config["SQLALCHEMY_DATABASE_URI"] = "postgresql+psycopg2://{user}:{passwd}@{host}:{port}/{table}".format(
@@ -18,7 +19,12 @@ app.config["SQLALCHEMY_DATABASE_URI"] = "postgresql+psycopg2://{user}:{passwd}@{
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 db = SQLAlchemy(app)
 migrate = Migrate(app, db)
-print(os.getenv("POSTGRES_USER"))
+# Session set up 
+app.secret_key=os.getenv('SESSION_SECRET')
+app.config['SESSION_TYPE'] = 'SESSION_SQLALCHEMY'
+app.config['SESSION_PERMANENT'] = True
+app.config['SESSION_FILE_THRESHOLD'] = 200
+app.config.from_object(__name__)
 
 class UserModel(db.Model):
     __tablename__="users"
@@ -32,6 +38,17 @@ class UserModel(db.Model):
 
     def __repr__(self):
         return f"<User {self.username}>"
+
+# Decorator
+def is_logged_in(f):
+    @wraps(f)
+    def wrap(*args, **kwargs):
+        if 'logged_in' in session:
+            return f(*args, **kwargs)
+        else:
+            flash('Unauthorized access, please login', 'danger')
+            return redirect(url_for('login'))
+    return wrap
 
 @app.route('/')
 def index():
@@ -55,7 +72,8 @@ def register():
             new_user = UserModel(username, generate_password_hash(password))
             db.session.add(new_user)
             db.session.commit()
-            return f"User {username} created successfully"
+            flash(f'User {username} created successfully', 'success')
+            return redirect(url_for('index'))
         else: 
             return error, 418
 
@@ -71,15 +89,33 @@ def login():
 
         if user is None: 
             error = "Incorrect username"
+            return render_template('login.html', error = error)
         elif not check_password_hash(user.password, password): 
             error = "Incorrect password."
+            return render_template('login.html', error = error)
         
         if error is None: 
-            return "Login Successful", 200
+            session['logged_in'] = True
+            session['username'] = username
+
+            flash('You are now logged in')
+            return redirect(url_for('journal'))
         else: 
             return error, 418
-
     return render_template("login.html")
+
+@app.route('/logout')
+@is_logged_in
+def logout():
+    session.clear()
+    flash('Your are now logged out', 'success')
+    return redirect(url_for('login'))
+
+
+@app.route('/journal')
+@is_logged_in
+def journal():
+    return render_template("journal.html")
 
 @app.route('/flights')
 def flights():
@@ -104,6 +140,4 @@ def flightsAPI():
     response = requests.request("GET", url, headers=headers, params=querystring)
 
     # print(response.text)
-        
-
     return response.text
