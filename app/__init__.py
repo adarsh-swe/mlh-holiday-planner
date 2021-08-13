@@ -1,4 +1,5 @@
 import os
+import re
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 from flask import (
@@ -7,6 +8,8 @@ from flask import (
 from wtforms import Form, StringField, TextAreaField, PasswordField, validators
 from functools import wraps
 from werkzeug.security import generate_password_hash, check_password_hash
+import requests
+import json 
 
 app = Flask(__name__)
 app.config["SQLALCHEMY_DATABASE_URI"] = "postgresql+psycopg2://{user}:{passwd}@{host}:{port}/{table}".format(
@@ -119,7 +122,7 @@ def journal():
 
 @app.route('/flights')
 def flights():
-    return render_template("flights.html")
+    return render_template("landing.html", filledData=False, data=None)
 
 @app.route('/flightsAPI', methods=("GET", "POST"))
 def flightsAPI(): 
@@ -133,11 +136,66 @@ def flightsAPI():
     url = f'https://skyscanner-skyscanner-flight-search-v1.p.rapidapi.com/apiservices/browseroutes/v1.0/US/USD/en-US/{origin}-sky/{destination}-sky/{departDate}'
     querystring = {"inboundpartialdate":returnDate}
     headers = {
-        'x-rapidapi-key': os.getenv("SKYSCANNER_KEY"),
+        'x-rapidapi-key': os.getenv("RAPID_API"),
         'x-rapidapi-host': "skyscanner-skyscanner-flight-search-v1.p.rapidapi.com"
     }
 
     response = requests.request("GET", url, headers=headers, params=querystring)
 
+    
     # print(response.text)
-    return response.text
+    # res = response.json()
+    res = response.json()
+    # return str(res)
+
+    destination = {}
+    origin = {}
+    flights = [] 
+
+    for x in res["Places"]: 
+        if(x["PlaceId"] == res["Routes"][0]["DestinationId"]):
+            destination = x
+        elif ((x["PlaceId"] == res["Routes"][0]["OriginId"])):
+            origin = x
+
+    for x in res["Quotes"]:
+        OutboundCarrier = "" 
+        InBoundCarrier = "" 
+
+        for i in res["Carriers"] :
+            if (i["CarrierId"] == x["OutboundLeg"]["CarrierIds"][0]):
+                OutBoundCarrier = i["Name"]
+
+        flight = {
+            "Direct" : x["Direct"],
+            "Price" : x["MinPrice"],
+            "Date" : x["OutboundLeg"]["DepartureDate"],
+            "OutboundCarrier" : OutBoundCarrier,
+            "InboundCarrier": InBoundCarrier,
+        }
+        flights.append(flight)
+
+
+    data = { 
+        "destination" : destination, 
+        "origin" : origin,
+        "flights" : flights
+    }
+    return render_template("landing.html", filledData=True, data=data)
+
+@app.route('/landing')
+def landing():
+    return render_template("landing.html")
+
+@app.route('/contact')
+def contact():
+    return render_template("contact.html")
+
+@app.route('/listing')
+def listing():
+    return render_template("listing.html")
+
+@app.route('/category')
+def category():
+    return render_template("category.html")
+
