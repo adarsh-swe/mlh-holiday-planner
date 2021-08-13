@@ -199,3 +199,21 @@ def listing():
 def category():
     return render_template("category.html")
 
+    return response.text
+
+
+@app.route('/landing')
+def landing():
+    return render_template("landing.html")
+
+@app.route('/contact')
+def contact():
+    return render_template("contact.html")
+
+@app.route('/listing')
+def listing():
+    return render_template("listing.html")
+
+@app.route('/category')
+def category():
+    return render_template("category.html")
