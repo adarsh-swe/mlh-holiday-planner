@@ -1,0 +1,20 @@
+version: "3"
+services:
+    nginx:
+        container_name: nginx
+        image: jonalsal/nginx-certbot:latest
+        env_file:
+            - ./nginx-certbot.env
+        ports:
+            - 80:80
+            - 443:443
+        volumes:
+            - nginx_secrets:/etc/letsencrypt
+            - ./user_conf.d:/etc/nginx/user_conf.d
+        networks:
+            - pgnet
+        depends_on:
+            - web
+
+volumes:
+    nginx_secrets:
