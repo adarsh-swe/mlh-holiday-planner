@@ -5,36 +5,55 @@
 	Home page<br>
 	Welcome to Holiday Planner!
 </div> -->
+
+	     <!-- Bootstrap 5 CDN Links -->
+		 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+		 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+	 
 			  <!-- Ubuntu - Google font -->
+		 <link rel="preconnect" href="https://fonts.googleapis.com">
+		 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		 <link href="https://fonts.googleapis.com/css2?family=Ubuntu&display=swap" rel="stylesheet">
+	 
+		 <link rel="preconnect" href="https://fonts.googleapis.com">
+		 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		 <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;700&display=swap" rel="stylesheet">
 	 
 			 <style>
 			   *{
 		 margin: 0;
 		 padding: 0;
 		 box-sizing: border-box;
-        
-}
+	 }
 	 
 	  html body
 	  {
 		  max-width: 100%;
 		  overflow-x: hidden;
 		  font-family: 'Ubuntu', sans-serif;
-          background-image: url("../static/img/background_airplane.jpg");
-
-        /* Full height */
-        height: 100%; 
-
-        /* Center and scale the image nicely */
-        background-position: center;
-        background-repeat: no-repeat;
-        background-attachment: fixed;
-        background-size: cover;
 	  }
 	 
+	  /* navbar */
+	 .navbar, header{
+		 background-color:#FFD25F;
+	 }
+	 .navbar-brand{
+		 font-family: 'Ubuntu', sans-serif;
+		 font-weight: bold;
+		 font-size: 28px;
+		 color: initial;
+	 }
+	 .nav-link{
+		 font-family: 'Ubuntu', sans-serif;
+		 font-weight: bold;
+		 color: initial;
+	 }
 	 .sign-in{
 		 border: 1px solid black;
 		 border-radius: 20px;
+	 }
+	 .navbar-nav{
+		 margin-left: auto;
 	 }
 	 
 	 /* header */
@@ -191,6 +210,34 @@
 		 background-color: #92D3F5;
 	 }  
 			 </style>
+
+<!-- navbar -->
+<nav class="navbar navbar-expand-lg">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#">MLHflight <img src="../static/img/noto_airplane.png" class="img-fluid" alt="airoplane"></a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link sign-in" href="#"><img src="../static/img/carbon_user-avatar-filled-alt.png" class="img-fluid" alt="avatar">&nbsp;Sign in
+                    </a>
+                </li>
+                <li class="nav-item mx-2">
+                    <a class="nav-link" href="#"><img src="../static/img/emojione_flag-for-canada.png" class="img-fluid" alt="flag"></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">c$</a>
+                </li>
+
+            </ul>
+        </div>
+
+
+    </div>
+
+</nav>
 
 <header>
     <div class="container">
@@ -388,7 +435,7 @@
                     <div class="row pt-3">
                         <div class="col-lg-3 col-md-3 col-sm-12 top-box-div">
                               <h6>Cheapest</h6>
-                            <p>C$ 506 · 9h 13m</p>
+                            <p>C$ 506 · 9h 12m</p>
                         </div>
                         <div class="col-lg-3 col-md-3 col-sm-12 top-box-div">
 
