@@ -122,7 +122,7 @@ def journal():
 
 @app.route('/flights')
 def flights():
-    return render_template("index.html", filledData=False, data=None)
+    return render_template("landing.html", filledData=False, data=None)
 
 @app.route('/flightsAPI', methods=("GET", "POST"))
 def flightsAPI(): 
@@ -181,7 +181,7 @@ def flightsAPI():
         "origin" : origin,
         "flights" : flights
     }
-    return render_template("index.html", filledData=True, data=data)
+    return render_template("landing.html", filledData=True, data=data)
 
 @app.route('/contact')
 def contact():
