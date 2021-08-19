@@ -136,7 +136,7 @@ def flightsAPI():
     url = f'https://skyscanner-skyscanner-flight-search-v1.p.rapidapi.com/apiservices/browseroutes/v1.0/US/USD/en-US/{origin}-sky/{destination}-sky/{departDate}'
     querystring = {"inboundpartialdate":returnDate}
     headers = {
-        'x-rapidapi-key': os.getenv("RAPID_API"),
+        'x-rapidapi-key': os.getenv("SKYSCANNER_KEY"),
         'x-rapidapi-host': "skyscanner-skyscanner-flight-search-v1.p.rapidapi.com"
     }
 
@@ -182,10 +182,6 @@ def flightsAPI():
         "flights" : flights
     }
     return render_template("landing.html", filledData=True, data=data)
-
-@app.route('/landing')
-def landing():
-    return render_template("landing.html")
 
 @app.route('/contact')
 def contact():
