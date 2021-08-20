@@ -1,51 +1,49 @@
-# mlh-holiday-planner
+# MLH-Holiday Planner Web app 
+## https://holidayplanner.tech
 
-## Dev Environment
+## Usage 
 
-Make a local copy of `.env` file following `example.env`
-
-To start development environment:
+1. Download Docker and docker-compose and make sure they are running
+2. Clone the repository 
+3. Make a local copy of `.env` file following `example.env`
+4. Obtain a Skyscanner API key from: https://rapidapi.com/skyscanner/api/skyscanner-flight-search/ and add into the `.env`. file 
+5. Start development environment:
 
 ```
 $ docker-compose up --build -d
 ```
+Access the flask app at http://localhost:5000/ 
 
 Any changes to HTML front-end and back-end will be reflected by hitting refresh in the browser.
 To install additional Flask packages, re-run docker-compose up build command.
 
-## Usage
+## More about MLHolidays 
 
-Create a .env file with the following line included:
+### Inspiration
+While brainstorming project ideas, one of our team members mentioned how difficult it was to plan their vacation. This got us thinking about what can be improved in the process and noticed how tedious it was to organise a trip across multiple bookings. Our aim was to solve the problem of having to juggle between different websites, so we built a platform which combines all of the necessary features. 
 
-```bash
-URL=localhost:5000
-```
+### What it does
+Our app makes it easier for people to plan their holiday trips. With an easy to use flight search and soon to come hotel search, users can quickly find accommodations for wherever they plan a visit. It relieves the stress of planning vacations so you can avoid the hassle and spend more time enjoying your holiday. 
 
-Start psql container using `$ docker-compose up -d`
+### How we built it
 
-Start flask development server
+In our team of four, we split the project into front-end, back-end, and devops then we assigned each person to a part to complete asynchronously. For the frontend, we used Jinja templating with pure HTML and CSS along with bootstrap to make our page responsive. In the back-end, we built a web server with python and flask which communicated with a postgreSQL database. The app is deployed on an AWS EC2 instance on a CentOS machine and is fully dockerised with a working CI/CD pipeline built with GitHub Actions. 
 
-```bash
-$ export FLASK_ENV=development
-$ flask run
-```
+### What we learned
+In regards to the front end for our application, we learned a lot about working with bootstrap files for designing and jquery files for the animations. This project helped us further our knowledge in flask, specifically the flask file structure and implementing sessions. We learned a great deal about working with APIs and integrating them into our web app.  It also helped us enhance our knowledge about github, python, docker, nginx and postgresql. We were also able to get familiar with monitoring tools such as prometheus and grafana. 
 
-## To use the '/flightsAPI' endpoint:
+### What's next for MLHolidays
+Integrating a hotel and car rental api with the listings endpoint. Adding a travel endpoint which uses web scraping to extract data from tripadvisor.com. 
 
--   make sure the api key is added in .env
--   call the endpoint with a POST request containing the following data (as key-value/ form data):
-    -   origin = origin airport code
-    -   destination = destination airport code
-    -   departDate = date of departure
-    -   returnDate = date of arrival
+## Tech Stack 
 
-EXAMPLE:
-
-```bash
-origin:YYZ
-destination:YVR
-departDate:2021-09-01
-returnDate:2021-12-01
-```
-
-_Note: for testing purposes, just use the exact form data above_
+### Front-end 
+    HTML 
+    CSS 
+    Bootstrap 
+ 
+### Back-end 
+    Flask 
+    PostgreSQL 
+    Docker 
+    
