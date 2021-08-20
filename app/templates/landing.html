@@ -12,6 +12,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 
+
     <title>MLH Holiday Planner</title>
 
     <!-- Bootstrap core CSS -->
@@ -155,10 +156,10 @@ https://templatemo.com/tm-564-plot-listing
                       <h6>Carrier: {{ x["OutboundCarrier"] }}</h6>
                       
                       <span class="price"><div class="icon"><img src="../static/img/listing-icon-01.png" alt=""></div>Price: ${{ x["Price"] }}</span>
-                      <span class="details">Date: ${{ x["Date"] }}</em></span>
+                      <span class="details">Date: {{ x["Date"] }}</em></span>
                      
                       <div class="main-white-button">
-                        <a href="#"><i class="fa fa-eye"></i>Book Now</a>
+                        <a href="/skyscanner" id="link" ><i class="fa fa-eye"></i>Book Now</a>
                       </div>
                     </div>
                   </div>

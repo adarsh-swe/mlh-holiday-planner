@@ -132,7 +132,13 @@ def flightsAPI():
         departDate = request.form.get("departDate")
         returnDate = request.form.get("returnDate")
         error = None
-    
+
+        session['origin'] = origin
+        session['destination'] = destination
+        session['departDate'] = departDate.replace("-","") 
+        session['returnDate'] = returnDate.replace("-","")
+
+        
     url = f'https://skyscanner-skyscanner-flight-search-v1.p.rapidapi.com/apiservices/browseroutes/v1.0/US/USD/en-US/{origin}-sky/{destination}-sky/{departDate}'
     querystring = {"inboundpartialdate":returnDate}
     headers = {
@@ -194,3 +200,9 @@ def listing():
 @app.route('/category')
 def category():
     return render_template("category.html")
+
+@app.route('/skyscanner')
+def skyscanner():
+    URL="https://www.skyscanner.ca/transport/flights/"+session["origin"]+"/"+session["destination"]+"/"+session['departDate']+"/"+session['returnDate']
+
+    return redirect(URL, code=302)
