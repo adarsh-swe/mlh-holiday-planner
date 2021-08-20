@@ -114,7 +114,6 @@ def logout():
     flash('Your are now logged out', 'success')
     return redirect(url_for('login'))
 
-
 @app.route('/journal')
 @is_logged_in
 def journal():
@@ -190,7 +189,3 @@ def contact():
 @app.route('/listing')
 def listing():
     return render_template("listing.html")
-
-@app.route('/category')
-def category():
-    return render_template("category.html")
