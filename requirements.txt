@@ -1,5 +1,6 @@
 alembic==1.6.5
 appdirs==1.4.4
+beautifulsoup4==4.9.3
 black==21.6b0
 cachelib==0.2.0
 certifi==2021.5.30
@@ -29,6 +30,7 @@ python-editor==1.0.4
 regex==2021.4.4
 requests==2.26.0
 six==1.16.0
+soupsieve==2.2.1
 SQLAlchemy==1.4.20
 toml==0.10.2
 typing-extensions==3.10.0.0

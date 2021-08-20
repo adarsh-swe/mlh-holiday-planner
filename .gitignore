@@ -103,6 +103,7 @@ celerybeat.pid
 
 # Environments
 .env
+nginx-certbot.env
 .venv
 env/
 venv/
