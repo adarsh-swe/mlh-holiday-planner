@@ -76,7 +76,7 @@ def register():
             db.session.add(new_user)
             db.session.commit()
             flash(f'User {username} created successfully', 'success')
-            return redirect(url_for('index'))
+            return redirect(url_for('login'))
         else: 
             return error, 418
 
