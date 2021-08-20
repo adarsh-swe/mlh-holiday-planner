@@ -1272,7 +1272,7 @@ contact
 
 form#contact {
   position: relative;
-  margin: 0px 60px 0px 45px;
+  margin: 40px 60px 40px 45px;
 }
 
 form#contact input {

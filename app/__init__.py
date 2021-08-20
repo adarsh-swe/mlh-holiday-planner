@@ -114,7 +114,6 @@ def logout():
     flash('Your are now logged out', 'success')
     return redirect(url_for('login'))
 
-
 @app.route('/journal')
 @is_logged_in
 def journal():
@@ -204,5 +203,5 @@ def category():
 @app.route('/skyscanner')
 def skyscanner():
     URL="https://www.skyscanner.ca/transport/flights/"+session["origin"]+"/"+session["destination"]+"/"+session['departDate']+"/"+session['returnDate']
-
     return redirect(URL, code=302)
+
