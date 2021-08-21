@@ -19,6 +19,14 @@ Access the flask app at http://localhost:5000/
 Any changes to HTML front-end and back-end will be reflected by hitting refresh in the browser.<br>
 To install additional Flask packages, re-run docker-compose up build command.
 
+## Monitoring
+
+Below are the monitoring tools used for our application:
+
+-   cAdvisor is available on http://localhost:8080
+-   Prometheus is available on http://localhost:9090
+-   Grfana is available on http://localhost:3000
+
 ## More about Holiday Planner
 
 ### Inspiration
